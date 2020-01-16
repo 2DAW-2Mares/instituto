@@ -12,9 +12,7 @@ class AnyosescolaresTableSeeder extends Seeder
     public function run()
     {
         DB::table('anyosescolares')->truncate();
-
         $centros = App\Centro::all();
-
         foreach ($centros as $centro) {
             DB::table('anyosescolares')->insert([
                 'fechainicio' => "2019/09/01",
@@ -22,7 +20,7 @@ class AnyosescolaresTableSeeder extends Seeder
                 'centro' => $centro->id,
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);  
+            ]);
         }
     }
 }
