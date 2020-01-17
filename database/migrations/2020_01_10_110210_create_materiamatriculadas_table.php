@@ -27,8 +27,6 @@ class CreateMateriamatriculadasTable extends Migration {
      * @return void
      */
     public function down() {
-        $table->dropForeign('alumno');
-        $table->dropForeign('materia');
-        $table->dropForeign('grupo');
+        Schema::dropIfExists('materiamatriculada');
     }
 }
