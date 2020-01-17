@@ -13,11 +13,11 @@ class CreateMateriamatriculadasTable extends Migration
      */
     public function up()
     {
-        Schema::create('materiamatriculada', function (Blueprint $table) {
+        Schema::create('materiamatriculadas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('alumno')->unsigned()->nullable();
-            $table->integer('materia')->nullable();
-            $table->integer('grupo')->nullable();
+            $table->biginteger('alumno')->unsigned()->nullable();
+            $table->biginteger('materia')->nullable();
+            $table->biginteger('grupo')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateMateriamatriculadasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materiamatriculada');
+        Schema::dropIfExists('materiamatriculadas');
     }
 }
