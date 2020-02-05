@@ -14,6 +14,13 @@ class MateriamatriculadaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Materiamatriculada::class, 'materiamatriculada');
+    }
+
+
     public function index()
     {
         return MateriamatriculadaResource::collection(Materiamatriculada::paginate());
@@ -31,6 +38,7 @@ class MateriamatriculadaController extends Controller
 
 
         return new MateriamatriculadaResource($materiamatriculada);
+
     }
 
     /**

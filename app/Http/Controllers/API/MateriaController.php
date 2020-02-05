@@ -9,7 +9,10 @@ use App\Http\Resources\MateriaResource;
 
 class MateriaController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->authorizeResource(Materia::class, 'materia');
+    }
     /**
      * Display a listing of the resource.
      *

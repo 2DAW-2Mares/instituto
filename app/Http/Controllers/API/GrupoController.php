@@ -6,9 +6,15 @@ use App\Grupo;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GrupoResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GrupoController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Grupo::class, 'grupo');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +33,13 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $grupo = Grupo::create(json_decode($request->getContent(), true));
+        $datosPOST = json_decode($request->getContent(), true);
+        $user = $request->user();
+        if(!$user->isSuperAdmin()){
+            $datosPOST['creador'] = Auth::id();
+        }
+        
+        $grupo = Grupo::create($datosPOST);
         return new GrupoResource($grupo);
     }
 
@@ -52,6 +64,16 @@ class GrupoController extends Controller
     public function update(Request $request, Grupo $grupo)
     {
         $grupo->update(json_decode($request->getContent(), true));
+        return new GrupoResource($grupo);
+    }
+
+    public function asignaTutor(Request $request, $grupo_id, $user_id){
+        $grupo = Grupo::findOrFail($grupo_id);
+        $this->authorize('asignaTutor', $grupo);
+
+        $g = json_decode($request->getContent(), true);
+        $g['tutor'] = $user_id;
+        $grupo->update($g);
         return new GrupoResource($grupo);
     }
 
