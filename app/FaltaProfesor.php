@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FaltaProfesor extends Model
 {
-    //
+    protected $table = 'faltasprofesores';
     protected $fillable = ['profesor_falta', 'profesor_guardia', 'periodoclase_id'];
     /**
      * Get the periodos the time of the journey

@@ -11,14 +11,9 @@ class FaltaProfesorTableSeeder extends Seeder
      */
     public function run()
     {
-        if (env('APP_ENV') != 'production') {
+        if(env('APP_ENV') != 'production') {
             DB::table('faltasprofesores')->truncate();
-            $usuarios = App\Usuario::all();
-            DB::table('faltasprofesores')->insert([
-                'profesor_falta' => $usuarios[rand(0, $usuarios->count()-1)] -> id,
-                'profesor_guardia' => $usuarios[rand(0, $usuarios->count()-1)]  -> id,
-                'periodoclase_id' => numberBetween($min = 1, $max = 30)
-            ]);
+            $faltas = factory(App\Faltaprofesor::class, 10)->create();
         }
     }
 }
