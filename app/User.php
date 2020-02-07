@@ -205,7 +205,7 @@ class User extends Authenticatable {
             'id' // Local key on anyosescolares table...
         );
     }
-  
+
     public function misProfesores(Nivel $nivel = null){
         //tenemos que sacar todas las matrículas que tiene un usuario
         $id = $this->id;
@@ -226,6 +226,33 @@ class User extends Authenticatable {
         return $docente;
     }
 
+    public function isTutorAlumno($alumno){
+        //Obtengo el usuario autenticado en este caso el Tutor
+        $tutor = Auth::user()->id;
+       // Hago la consulta para sacar el grupo del tutor
+        $sacarGrupo = Grupo::where('tutor' ,'=', $tutor)->select('id')->first();
+        // Obtenido el grupo procedo a sacar la matricula del alumno, que tiene en comun el grupo del tutor
+        $sacarConfirmacion = Matricula::where([
+            ['alumno', '=', $alumno],
+            ['grupo', '=', $sacarGrupo->id],
+        ])->first();
+        // Si la consulta no muestra nada, significa que no está dentro, si muestra algo es true!
+       if ($sacarConfirmacion != "") {
+           return true;
+       }else{
+           return false;
+       }
+       // Subconsulta realizada para aclarar mis ideas para hacer esto en Laravel
+
+      //  SELECT * FROM matriculas WHERE alumno = 114 AND grupo = (SELECT id FROM grupos WHERE tutor = 2)
+
+     //    Hecho por Alejandro
+
+    }
+
+
+
+
     public function misGruposImpartidos() {
         return $this->hasManyThrough(
             'App\Grupo', //Destino
@@ -236,7 +263,7 @@ class User extends Authenticatable {
             'grupo' // Local Key Materiaimpartida
         );
     }
-  
+
     public function misMateriasMatriculadas() {
         return $this->belongsToMany(
             'App\Materia',
