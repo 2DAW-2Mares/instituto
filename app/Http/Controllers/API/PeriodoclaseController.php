@@ -89,4 +89,15 @@ class PeriodoclaseController extends Controller
 
         return  PeriodoclaseResource::collection(($horario));
     }
+
+    public function horarioSemanal($grupo_id) {
+
+        $materiaImpartida = Materiaimpartida::where('grupo', $grupo_id)->get();
+
+        $horario = Periodoclase::whereIn('materiaimpartida_id', $materiaImpartida->map(function ($item, $key) {
+            return $item->id;
+        }))->get();
+
+        return  PeriodoclaseResource::collection(($horario));
+    }
 }

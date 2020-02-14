@@ -67,6 +67,8 @@ Route::middleware('auth:api')->group(function() {
     Route::get( 'horarios/docente/{user_id}', 'API\PeriodoclaseController@getHorarioDocente');
     Route::get('horarios/meToca', 'API\PeriodoclaseController@meToca');
 
+    Route::get('grupos/{grupo_id}/horarioSemanal', 'API\PeriodoclaseController@horarioSemanal');
+
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
