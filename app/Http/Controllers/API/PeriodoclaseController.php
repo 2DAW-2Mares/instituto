@@ -80,15 +80,12 @@ class PeriodoclaseController extends Controller
 
         $this->authorize('getHorarioDocente', new Periodoclase());
 
+
         if (!Auth::user()->isSuperAdmin()) {
             $id = Auth::id();
         }
 
-        $materiaImpartida = Materiaimpartida::where('docente', $id)->get();
-
-        $horario = Periodoclase::whereIn('materiaimpartida_id', $materiaImpartida->map(function ($item, $key) {
-            return $item->id;
-        }))->get();
+        $horario = User::find($id)->getHorarioDocente();
 
         return  PeriodoclaseResource::collection(($horario));
     }

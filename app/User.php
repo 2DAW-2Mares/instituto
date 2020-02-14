@@ -261,4 +261,16 @@ class User extends Authenticatable {
         return response()->json($toca);
 
     }
+
+    public  function getHorarioDocente()
+    {
+
+        $materiaImpartida = Materiaimpartida::where('docente', $this->id)->get();
+
+        $horario = Periodoclase::whereIn('materiaimpartida_id', $materiaImpartida->map(function ($item, $key) {
+            return $item->id;
+        }))->get();
+
+        return $horario;
+    }
 }
