@@ -254,7 +254,7 @@ class User extends Authenticatable {
             ->join('periodoslectivos', 'anyosescolares.id', '=', 'periodoslectivos.anyoescolar_id')
             ->join('periodosclases', 'periodoslectivos.id', '=', 'periodosclases.periodo_id')
             ->select('periodosclases.materiaimpartida_id', 'periodosclases.aula_id')
-            ->whereRaw('`users`.`id` = ? and `periodoslectivos`.`hora_inicio` <= CURRENT_TIME() and `periodoslectivos`.`hora_fin` >= CURRENT_TIME()', [2]
+            ->whereRaw('`users`.`id` = ? and `periodoslectivos`.`hora_inicio` <= CURRENT_TIME() and `periodoslectivos`.`hora_fin` >= CURRENT_TIME()', [$this->id]
             )->distinct()->get();
 
         //echo $horaActual;
