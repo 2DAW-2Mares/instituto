@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Processors\AvatarProcessor;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,14 @@ class User extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function file() {
+        return $this->belongsTo(File::class);
+    }
+
+    public function getAvatarAttribute() {
+        return AvatarProcessor::get($this);
+    }
 
     /**
      * Get the centros for the user.
