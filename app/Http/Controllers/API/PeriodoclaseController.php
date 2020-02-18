@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Grupo;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Materiaimpartida;
@@ -92,11 +93,7 @@ class PeriodoclaseController extends Controller
 
     public function horarioSemanal($grupo_id) {
 
-        $materiaImpartida = Materiaimpartida::where('grupo', $grupo_id)->get();
-
-        $horario = Periodoclase::whereIn('materiaimpartida_id', $materiaImpartida->map(function ($item, $key) {
-            return $item->id;
-        }))->get();
+        $horario = Grupo::find($grupo_id)->horarioSemanal();
 
         return   PeriodoclaseResource::collection($horario);
     }
