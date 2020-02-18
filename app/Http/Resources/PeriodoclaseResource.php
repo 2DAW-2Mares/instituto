@@ -16,9 +16,9 @@ class PeriodoclaseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'periodo_id' => $this->periodoObject,
-            'materiaimpartida_id' => $this->materiaimpartidaObject,
-            'aula_id' => $this->aulaObject
+            'periodo' => $this->periodoObject,
+            'materia' => $this->materia(),
+            'aula' => $this->aulaObject
         ];
     }
 }

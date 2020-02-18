@@ -20,4 +20,9 @@ class Periodoclase extends Model
     public function aulaObject() {
         return $this->belongsTo('App\Aula', 'aula_id');
     }
+
+    public function materia()
+    {
+        return Materiaimpartida::find($this->materiaimpartida_id)->materiaObject;
+    }
 }

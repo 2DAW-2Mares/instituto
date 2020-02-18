@@ -87,7 +87,7 @@ class PeriodoclaseController extends Controller
 
         $horario = User::find($id)->getHorarioDocente();
 
-        return  PeriodoclaseResource::collection(($horario));
+        return  PeriodoclaseResource::collection($horario);
     }
 
     public function horarioSemanal($grupo_id) {
@@ -98,6 +98,6 @@ class PeriodoclaseController extends Controller
             return $item->id;
         }))->get();
 
-        return  PeriodoclaseResource::collection(($horario));
+        return   PeriodoclaseResource::collection($horario);
     }
 }
