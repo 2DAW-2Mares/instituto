@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
+use App\Anyoescolar;
+use App\Periodolectivo;
+use App\Periodoclase;
+use App\Faltaprofesor;
+use App\Http\Resources\AnyoescolarResource;
+
 class CentroController extends Controller
 {
     public function __construct()
@@ -104,6 +110,26 @@ class CentroController extends Controller
               return new CentroResource($centro);
 
         }
+    }
 
-}
+    public function sustituciones(User $user, $dia_semana=null, $hora_inicio=null)
+    {
+        $anyosActuales = Anyoescolar::anyoescolarActual();;
+        if ($dia_semana && $hora_inicio){
+            $periodosLectivos = Periodolectivo::whereIn('anyoescolar_id', $anyosActuales)->where([
+                ['dia', '=', $dia_semana],
+                ['hora_inicio', '=', $hora_inicio],
+            ])->get('id');
+        }else{
+            $periodosLectivos = Periodolectivo::whereIn('anyoescolar_id', $anyosActuales)->get('id');
+        }
+        $periodosClases = Periodoclase::whereIn('periodo_id',$periodosLectivos)->get('id');
+        $totalSustituciones = Faltaprofesor::whereIn('periodoclase_id',$periodosClases)->get('profesor_guardia');
+        $counted = $totalSustituciones->countBy('profesor_guardia');
+        $filtrado = $counted->filter(function ($value, $key) {
+            return $key != '';
+        });
+
+        return $filtrado;
+    }
 }
