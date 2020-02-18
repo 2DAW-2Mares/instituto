@@ -13,6 +13,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/users',
+      name: 'users',
+      component: () => import('./views/Users.vue')
+    },
+    {
       path: '/tables',
       name: 'tables',
       component: () => import('./views/Tables.vue')

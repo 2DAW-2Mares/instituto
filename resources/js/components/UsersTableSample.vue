@@ -10,32 +10,24 @@
       :striped="true"
       :hoverable="true"
       default-sort="name"
-      :data="clients">
+      :data="users">
 
       <template slot-scope="props">
-        <b-table-column class="has-no-head-mobile is-image-cell">
-          <div v-if="props.row.avatar" class="image">
-            <img :src="props.row.avatar" class="is-rounded">
-          </div>
-        </b-table-column>
         <b-table-column label="Name" field="name" sortable>
           {{ props.row.name }}
         </b-table-column>
-        <b-table-column label="Company" field="company" sortable>
-          {{ props.row.company }}
+        <b-table-column label="First Name" field="first_name" sortable>
+          {{ props.row.first_name }}
         </b-table-column>
-        <b-table-column label="City" field="city" sortable>
-          {{ props.row.city }}
-        </b-table-column>
-        <b-table-column class="is-progress-col" label="Progress" field="progress" sortable>
-          <progress class="progress is-small is-primary" :value="props.row.progress" max="100">{{ props.row.progress }}</progress>
+        <b-table-column label="Last Name" field="last_name" sortable>
+          {{ props.row.last_name }}
         </b-table-column>
         <b-table-column label="Created">
-          <small class="has-text-grey is-abbr-like" :title="props.row.created">{{ props.row.created }}</small>
+          <small class="has-text-grey is-abbr-like" :title="props.row.created_at">{{ props.row.created_at }}</small>
         </b-table-column>
         <b-table-column custom-key="actions" class="is-actions-cell">
           <div class="buttons is-right">
-            <router-link :to="{name:'clients.edit', params: {id: props.row.id}}" class="button is-small is-primary">
+            <router-link :to="{name:'users.edit', params: {id: props.row.id}}" class="button is-small is-primary">
               <b-icon icon="account-edit" size="is-small"/>
             </router-link>
             <button class="button is-small is-danger" type="button" @click.prevent="trashModal(props.row)">
@@ -69,7 +61,7 @@
 import ModalTrashBox from '@/components/ModalTrashBox'
 
 export default {
-  name: 'ClientsTableSample',
+  name: 'UsersTableSample',
   components: { ModalTrashBox },
   props: {
     dataUrl: {
@@ -85,7 +77,7 @@ export default {
     return {
       isModalActive: false,
       trashObject: null,
-      clients: [],
+      users: [],
       isLoading: false,
       paginated: false,
       perPage: 10,
@@ -112,11 +104,11 @@ export default {
           .get(this.dataUrl)
           .then(r => {
             this.isLoading = false
-            if (r.data && r.data.data) {
-              if (r.data.data.length > this.perPage) {
+            if (r.data && r.data.records) {
+              if (r.data.records.length > this.perPage) {
                 this.paginated = true
               }
-              this.clients = r.data.data
+              this.users = r.data.records
             }
           })
           .catch( err => {
@@ -137,7 +129,7 @@ export default {
       this.isModalActive = false
 
       axios
-        .delete(`/clients/${this.trashObject.id}/destroy`)
+        .delete(`/api/records/users/${this.trashObject.id}`)
         .then( r => {
           this.getData()
 

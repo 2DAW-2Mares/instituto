@@ -43,6 +43,11 @@ export default {
         'Examples',
         [
           {
+            to: '/users',
+            label: 'Usuarios',
+            icon: 'table'
+          },
+          {
             to: '/tables',
             label: 'Tables',
             icon: 'table'

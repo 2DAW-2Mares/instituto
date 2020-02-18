@@ -15,34 +15,8 @@
         </div>
       </notification>
 
-      <card-component class="has-table has-mobile-sort-spaced" title="Clients" icon="account-multiple">
-        <clients-table-sample data-url="/clients" :checkable="true"/>
-      </card-component>
-
-      <hr>
-
-      <notification class="is-info">
-        <div>
-          <b-icon icon="buffer" custom-size="default"/>
-          <b>Tightly wrapped</b> &mdash; table header becomes card header
-        </div>
-      </notification>
-
-      <card-component class="has-table has-mobile-sort-spaced">
-        <clients-table-sample data-url="/clients" :checkable="true"/>
-      </card-component>
-
-      <hr>
-
-      <notification class="is-info">
-        <div>
-          <b-icon icon="buffer" custom-size="default"/>
-          <b>Empty table.</b> When there's nothing to show
-        </div>
-      </notification>
-
-      <card-component class="has-table">
-        <clients-table-sample/>
+      <card-component class="has-table has-mobile-sort-spaced" title="Usuarios" icon="account-multiple">
+        <users-table-sample data-url="/api/records/users" :checkable="true"/>
       </card-component>
     </section>
   </div>
@@ -51,18 +25,18 @@
 
 <script>
 import Notification from '@/components/Notification'
-import ClientsTableSample from '@/components/ClientsTableSample'
+import UsersTableSample from '@/components/UsersTableSample'
 import CardComponent from '@/components/CardComponent'
 import TitleBar from '@/components/TitleBar'
 import HeroBar from '@/components/HeroBar'
 export default {
-  name: 'Tables',
-  components: { HeroBar, TitleBar, CardComponent, ClientsTableSample, Notification },
+  name: 'Users',
+  components: { HeroBar, TitleBar, CardComponent, UsersTableSample, Notification },
   computed: {
     titleStack () {
       return [
         'Admin',
-        'Tables'
+        'Users'
       ]
     }
   }
