@@ -2,16 +2,16 @@
 
 namespace App\Policies;
 
-use App\Faltasalumnos;
+use App\Faltaalumno;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
-class FaltasalumnosPolicy
+use Illuminate\Auth\Access\Response;
+class FaltaalumnoPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any faltasalumnos.
+     * Determine whether the user can view any Faltaalumno.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -22,19 +22,19 @@ class FaltasalumnosPolicy
     }
 
     /**
-     * Determine whether the user can view the faltasalumnos.
+     * Determine whether the user can view the Faltaalumno.
      *
      * @param  \App\User  $user
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return mixed
      */
-    public function view(User $user, Faltasalumnos $faltasalumnos)
+    public function view(User $user, Faltaalumno $Faltaalumno)
     {
        return true;
     }
 
     /**
-     * Determine whether the user can create faltasalumnos.
+     * Determine whether the user can create Faltaalumno.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -45,54 +45,62 @@ class FaltasalumnosPolicy
     }
 
     /**
-     * Determine whether the user can update the faltasalumnos.
+     * Determine whether the user can update the Faltaalumno.
      *
      * @param  \App\User  $user
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return mixed
      */
-    public function update(User $user, Faltasalumnos $faltasalumnos)
+    public function update(User $user, Faltaalumno $Faltaalumno)
     {
-        return $user->id === $faltasalumnos->alumno
+        return $user->id === $Faltaalumno->periodoClaseObject->materiaimpartidaObject->docente
         ? Response::allow()
         : Response::deny('No eres el profesor ha generado la falta.');
     }
 
     /**
-     * Determine whether the user can delete the faltasalumnos.
+     * Determine whether the user can delete the Faltaalumno.
      *
      * @param  \App\User  $user
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return mixed
      */
-    public function delete(User $user, Faltasalumnos $faltasalumnos)
+    public function delete(User $user, Faltaalumno $Faltaalumno)
     {
-        return $user->id === $faltasalumnos->alumno
+       
+
+        return $user->id === $Faltaalumno->periodoClaseObject->materiaimpartidaObject->docente 
         ? Response::allow()
         : Response::deny('No eres el profesor ha generado la falta.');
     }
 
     /**
-     * Determine whether the user can restore the faltasalumnos.
+     * Determine whether the user can restore the Faltaalumno.
      *
      * @param  \App\User  $user
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return mixed
      */
-    public function restore(User $user, Faltasalumnos $faltasalumnos)
+    public function restore(User $user, Faltaalumno $Faltaalumno)
     {
         //
     }
 
     /**
-     * Determine whether the user can permanently delete the faltasalumnos.
+     * Determine whether the user can permanently delete the Faltaalumno.
      *
      * @param  \App\User  $user
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return mixed
      */
-    public function forceDelete(User $user, Faltasalumnos $faltasalumnos)
+    public function forceDelete(User $user, Faltaalumno $Faltaalumno)
     {
         //
+    }
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
     }
 }

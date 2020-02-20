@@ -16,7 +16,6 @@ class AddForeignToFaltasalumnosTable extends Migration
         Schema::table('faltasalumnos', function (Blueprint $table) {
             $table->foreign('alumno')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('periodoclase_id')->references('id')->on('periodosclases')->onDelete('cascade');
-           
         });
     }
 
@@ -28,8 +27,8 @@ class AddForeignToFaltasalumnosTable extends Migration
     public function down()
     {
         Schema::table('faltasalumnos', function (Blueprint $table) {
-            $table->dropForeign('faltasalumnos_alumno_foreign');
-            $table->dropForeign('faltasalumnos_periodoclase_id_foreign');
+            $table->dropForeign('Faltaalumno_alumno_foreign');
+            $table->dropForeign('Faltaalumno_periodoclase_id_foreign');
         });
     }
 }

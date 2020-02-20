@@ -1,6 +1,6 @@
 <?php
 
-use App\Faltasalumnos;
+use App\Faltaalumno;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GruposTableSeeder::class);
         $this->call(MateriasimpartidasTableSeeder::class);
         $this->call(NivelesTableSeeder::class);
-        $this->call(FaltasalumnosTableSeeder::class);
+        $this->call(FaltaalumnoTableSeeder::class);
         $this->call(AulasTableSeeder::class);
         $this->call(PeriodoslectivosTableSeeder::class);
         $this->call(PeriodoclaseTableSeeder::class);

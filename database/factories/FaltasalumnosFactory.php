@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Faltasalumnos;
+use App\Faltaalumno;
 use Faker\Generator as Faker;
 
-$factory->define(Faltasalumnos::class, function (Faker $faker) {
+$factory->define(Faltaalumno::class, function (Faker $faker) {
     return [
         'alumno' => $faker->randomNumber(),
         'asiste' => $faker->boolean($chanceOfGettingTrue = 50),

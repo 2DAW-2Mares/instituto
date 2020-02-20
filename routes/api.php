@@ -26,7 +26,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', 'API\UserController')->parameters([
         'users' => 'user',
     ]);
-    Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
+    Route::apiResource('Faltaalumno', 'API\FaltaalumnoController')->parameters([
+        'Faltaalumno' => 'faltaalumno',
+    ]);
 
     Route::apiResource('tutorizados', 'API\TutorizadoController');
 

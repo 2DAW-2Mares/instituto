@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Faltasalumnos;
+use App\Faltaalumno;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FaltasalumnosResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class FaltasalumnosController extends Controller
+class FaltaalumnoController extends Controller
 {
+   public function __construct()
+    {
+       $this->authorizeResource(Faltaalumno::class, 'faltaalumno');
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class FaltasalumnosController extends Controller
      */
     public function index()
     {
-        //
+       /*  return Faltaalumno::collection(Faltaalumno::paginate());  */
     }
 
     /**
@@ -26,40 +32,45 @@ class FaltasalumnosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       /*  $Faltaalumno = Faltaalumno::create(json_decode($request->getContent(), true));
+
+
+        return new FaltaalumnoResource($Faltaalumno); */
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return \Illuminate\Http\Response
      */
-    public function show(Faltasalumnos $faltasalumnos)
+    public function show(Faltaalumno $Faltaalumno)
     {
-        //
+      /*   return new FaltaalumnoResource($Faltaalumno); */
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faltasalumnos $faltasalumnos)
+    public function update(Request $request, Faltaalumno $Faltaalumno)
     {
-        //
+        $aula->update(json_decode($request->getContent(), true));
+        return new FaltaalumnoResource($Faltaalumno);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Faltasalumnos  $faltasalumnos
+     * @param  \App\Faltaalumno  $Faltaalumno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Faltasalumnos $faltasalumnos)
+    public function destroy(Faltaalumno $Faltaalumno)
     {
-        //
-    }
+        /* $this->authorize('delete', $Faltaalumno);  */
+        $Faltaalumno->delete();
+}
 }

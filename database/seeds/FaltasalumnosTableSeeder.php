@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class FaltasalumnosTableSeeder extends Seeder
+class FaltaalumnoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class FaltasalumnosTableSeeder extends Seeder
     {
         
             DB::table('faltasalumnos')->truncate();
-            $faltas = factory(App\Faltasalumnos::class, 20)->create();    }
+            $faltas = factory(App\Faltaalumno::class, 20)->create();    }
 
 }
