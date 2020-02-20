@@ -13,7 +13,8 @@ class PeriodoslectivosTableSeeder extends Seeder
     {
         $dias = array('L', 'M', 'X', 'J', 'V');
         $horas_inicio = array('08:15', '09:10', '10:05', '11:30', '12:25', '13:20');
-        $horas_fin = array('09:10', '10:05', '11:30', '12:25', '13:20', '14:15');;
+        $horas_fin = array('09:10', '10:05', '11:30', '12:25', '13:20', '14:15');
+        $anyosescolares = \App\Anyoescolar::all();
 
         if(env('APP_ENV') != 'production') {
             DB::table('periodoslectivos')->truncate();
@@ -24,7 +25,7 @@ class PeriodoslectivosTableSeeder extends Seeder
                         'dia' => $dias[$i],
                         'hora_inicio' => $horas_inicio[$j],
                         'hora_fin' => $horas_fin[$j],
-                        'anyoescolar_id' => rand(2019, 2025)
+                        'anyoescolar_id' => $anyosescolares[rand(0, count($anyosescolares)-1)]->id
                     ]);
                 }
             }
