@@ -103,5 +103,9 @@ class CentroController extends Controller
 
         }
 
-}
+    }
+    public function PeriodoActual(){
+
+        return Centro::periodoActual();
+    }
 }
