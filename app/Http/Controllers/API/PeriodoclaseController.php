@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Grupo;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Materiaimpartida;
@@ -87,6 +88,13 @@ class PeriodoclaseController extends Controller
 
         $horario = User::find($id)->getHorarioDocente();
 
-        return  PeriodoclaseResource::collection(($horario));
+        return  PeriodoclaseResource::collection($horario);
+    }
+
+    public function horarioSemanal($grupo_id) {
+
+        $horario = Grupo::find($grupo_id)->horarioSemanal();
+
+        return   PeriodoclaseResource::collection($horario);
     }
 }

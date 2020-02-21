@@ -12,8 +12,8 @@ class GruposTableSeeder extends Seeder
     public function run()
     {
         if(env('APP_ENV') != 'production') {
-            DB::table('aulas')->truncate();
-            $aulas = factory(\App\Aula::class, 20)->create();
+            DB::table('grupos')->truncate();
+            $grupos = factory(\App\Grupo::class, 20)->create();
         }
     }
 }

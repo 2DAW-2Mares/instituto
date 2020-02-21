@@ -42,4 +42,16 @@ class Grupo extends Model
     {
         return $this->belongsTo('App\Nivel', 'nivel');
     }
+
+    public function horarioSemanal(){
+
+        $materiaImpartida = Materiaimpartida::where('grupo', $this->id)->get();
+
+        $horario = Periodoclase::whereIn('materiaimpartida_id', $materiaImpartida->map(function ($item, $key) {
+            return $item->id;
+        }))->get();
+
+        return $horario;
+    }
+
 }
