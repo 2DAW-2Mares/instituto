@@ -13,7 +13,7 @@
       :data="users">
 
       <template slot-scope="props">
-        <b-table-column label="Name" field="name" sortable>
+        <b-table-column label="Nombre" field="name" sortable>
           {{ props.row.name }}
         </b-table-column>
         <b-table-column label="First Name" field="first_name" sortable>

@@ -15,7 +15,7 @@
         </div>
       </notification>
 
-      <card-component class="has-table has-mobile-sort-spaced" title="Usuarios" icon="account-multiple">
+      <card-component class="has-table has-mobile-sort-spaced" title="Mis Usuarios" icon="account-multiple">
         <users-table-sample data-url="/api/records/users" :checkable="true"/>
       </card-component>
     </section>
